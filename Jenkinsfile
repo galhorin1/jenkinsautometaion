@@ -9,10 +9,10 @@ pipeline {
       stage('python files') {
          steps {
             echo 'python files'
-		 sh ''' if [ "${LANG}" == "python" ] || [ "${LANG}" == "all" ];then
-		 	cat *.py
+		 sh ''' if [ "${LANG}" -ne "python" ] && [ "${LANG}" -ne "all" ];then
+		 	 echo "selected value does not match for python"
 		 else
-			 echo "selected value does not match for python"
+			cat *.py
 		 fi '''
          }
       }
