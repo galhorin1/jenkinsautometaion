@@ -6,18 +6,10 @@ pipeline {
           checkout scm
         } 
       }
-	   stage('all files') {
-		   steps{
-		   sh ''' if [ "${LANG}" == "all" ];then
-			   cat *
-			exit 0
-			fi'''
-		   }
-	   }
       stage('python files') {
          steps {
             echo 'python files'
-		 sh ''' if [ "${LANG}" == "python" ];then
+		 sh ''' if [ "${LANG}" == "python" ] || [ "${LANG}" == "all" ];then
 		 	cat *.py
 		 else
 			 echo "selected value does not match for python"
@@ -27,7 +19,7 @@ pipeline {
       stage('c files') {
          steps {
             echo 'c files'
-		  sh''' if [ "${LANG}" == "c" ];then
+		  sh''' if [ "${LANG}" == "c" ] || [ "${LANG}" == "all" ];then
 		 	cat *.c
 		 else
 			 echo "selected value does not match for c"
@@ -37,7 +29,7 @@ pipeline {
       stage('bash files') {
          steps {
             echo 'bash files'  
-		  sh''' if [ "${LANG}" == "bash" ];then
+		  sh''' if [ "${LANG}" == "bash" ] || [ "${LANG}" == "all" ];then
 		 	cat *.sh
 		 else
 			 echo "selected value does not match for bash"
