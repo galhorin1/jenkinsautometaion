@@ -10,7 +10,7 @@ pipeline {
          steps {
             echo 'python files'
 		 script {
-                    if ((env.LANGUAGE == 'all')||(env.LANGUAGE == 'python') ) {
+                    if (($LANGUAGE == 'all')||(env.LANGUAGE == 'python') ) {
                         sh cat *.py
                     } else {
                         echo 'selected field does not match python/all'
