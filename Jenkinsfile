@@ -1,26 +1,43 @@
 pipeline {
    agent any
-  
+
    stages {
-      	stage('build') {
+      stage('Build') { 
+	    steps { 
+	    	sh 'echo "My first pipeline"' 
+	    	sh ''' 
+	    		echo "By the way, I can do more stuff in here" 
+	    		ls -la ~ 
+	    	''' 
+	    } 
+}  
+      
+	  stage('Test') {
          steps {
-            sh echo 'this is the build step here we down load the files to our local machine'
+            echo 'The Test is started'
          }
       }
-      	stage('python') {
+	  stage('Deploy') {
          steps {
-           sh echo 'this is the python file step'
+            echo 'The Deploy is started'
          }
       }
-	  stage('c') {
-         steps {
-           sh echo 'this is the c file step'
-         }
+      stage('Timeout') { 
+	      steps { 
+	      	  retry(3) { 
+	      	  	  sh 'echo "I am not going to work :c"' 
+	      	  }
+	      }
       }
-	  stage('bash') {
-         steps {
-          sh echo 'this is the bash file step'
-         }
+      stage('Timeout3') {
+	      steps {
+	      	  retry(3) { 
+	      	  	  sh 'echo hello'
+	      	  }
+	      	  timeout(time: 3, unit: 'SECONDS') { 
+	      	  	  sh 'sleep 5' 
+	      	  } 
+	      }
       }
    }
 }
