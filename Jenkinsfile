@@ -2,6 +2,11 @@ pipeline {
    agent any
   
    stages {
+      stage('build') {
+         steps {
+            echo 'this is the build step here we down load the files to our local machine'
+         }
+      }
       stage('python') {
          steps {
             echo 'this is the python file step'
