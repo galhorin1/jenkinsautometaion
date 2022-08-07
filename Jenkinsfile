@@ -22,7 +22,7 @@ pipeline {
          steps {
             echo 'c files'
 		  script {
-                    if ((env.LANGUAGE == 'all')||(env.LANGUAGE == 'c') ) {
+                    if (($LANGUAGE == 'all')||(env.LANGUAGE == 'c') ) {
                         sh cat *.c
                     } else {
                         echo 'selected field does not match c/all'
@@ -34,7 +34,7 @@ pipeline {
          steps {
             echo 'bash files'    
 		  script {
-                    if ((env.LANGUAGE == 'all')||(env.LANGUAGE == 'bash') ) {
+                    if (($LANGUAGE == 'all')||(env.LANGUAGE == 'bash') ) {
                         sh cat *.sh
                     } else {
                         echo 'selected field does not match shell/all'
