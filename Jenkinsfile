@@ -9,7 +9,7 @@ pipeline {
       stage('python files') {
          steps {
             echo 'python files'
-		 sh ''' if [ "${LANG}" -ne "python" ] && [ "${LANG}" -ne "all" ];then
+		 sh ''' if [ "${LANG}" != "python" ] && [ "${LANG}" != "all" ];then
 		 	 echo "selected value does not match for python"
 		 else
 			cat *.py
@@ -19,7 +19,7 @@ pipeline {
       stage('c files') {
          steps {
             echo 'c files'
-		  sh''' if [ "${LANG}" -ne "c" ] && [ "${LANG}" -ne "all" ];then
+		  sh''' if [ "${LANG}" != "c" ] && [ "${LANG}" != "all" ];then
 		 	echo "selected value does not match for c"
 		 else
 			 cat *.c
@@ -29,7 +29,7 @@ pipeline {
       stage('bash files') {
          steps {
             echo 'bash files'  
-		  sh''' if [ "${LANG}" -ne "bash" ] && [ "${LANG}" -ne "all" ];then
+		  sh''' if [ "${LANG}" != "bash" ] && [ "${LANG}" != "all" ];then
 		 	echo "selected value does not match for bash"
 		 else
 			 cat *.sh
