@@ -22,22 +22,5 @@ pipeline {
             echo 'The Deploy is started'
          }
       }
-      stage('Timeout') { 
-	      steps { 
-	      	  retry(3) { 
-	      	  	  sh 'echo "I am not going to work :c"' 
-	      	  }
-	      }
-      }
-      stage('Timeout3') {
-	      steps {
-	      	  retry(3) { 
-	      	  	  sh 'echo hello'
-	      	  }
-	      	  timeout(time: 3, unit: 'SECONDS') { 
-	      	  	  sh 'sleep 5' 
-	      	  } 
-	      }
-      }
    }
 }
