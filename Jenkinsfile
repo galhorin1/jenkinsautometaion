@@ -1,27 +1,46 @@
 pipeline {
-  agent any
+  agent { node { label 'slave01' } }
 
    stages {
-      stage('Build') {
+      stage('Clone Sources') {
+        steps {
+          checkout scm
+        } 
+      }
+      stage('python files') {
          steps {
-            echo 'Build process..'
-            sh 'echo "My first pipeline"'
-            sh '''
-                echo "By the way, I can do more stuff in here"
-                ls -la ~
-		touch report
-            '''
+            echo 'python files'
+		 script {
+                    if ((env.LANGUAGE == 'all')||(env.LANGUAGE == 'python') ) {
+                        sh cat *.py
+                    } else {
+                        echo 'selected field does not match python/all'
+                    }
+                }
          }
       }
-      stage('Test') {
+      stage('c files') {
          steps {
-            echo 'Test process..'
-	    sh 'exit 0'
+            echo 'c files'
+		  script {
+                    if ((env.LANGUAGE == 'all')||(env.LANGUAGE == 'c') ) {
+                        sh cat *.c
+                    } else {
+                        echo 'selected field does not match c/all'
+                    }
+                }
          }
       }
-      stage('Deploy') {
+      stage('bash files') {
          steps {
-            echo 'Deploy process..'           
+            echo 'bash files'    
+		  script {
+                    if ((env.LANGUAGE == 'all')||(env.LANGUAGE == 'bash') ) {
+                        sh cat *.sh
+                    } else {
+                        echo 'selected field does not match shell/all'
+                    }
+                }
          }
       }
       
