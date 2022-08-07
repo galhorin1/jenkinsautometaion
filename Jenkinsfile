@@ -1,26 +1,34 @@
 pipeline {
-   agent any
+  agent { node { label 'slave01' } }
 
    stages {
-      stage('Build') { 
-	    steps { 
-	    	sh 'echo "My first pipeline"' 
-	    	sh ''' 
-	    		echo "By the way, I can do more stuff in here" 
-	    		ls -la ~ 
-	    	''' 
-	    } 
-}  
+      stage('Clone Sources') {
+        steps {
+          checkout scm
+        } 
+      }
+      stage('Build') {
+         steps {
+            echo 'Build process..'
+            sh 'echo "My first pipeline"'
+            sh '''
+                echo "By the way, I can do more stuff in here"
+                ls -la ~
+		touch report
+            '''
+         }
+      }
+      stage('Test') {
+         steps {
+            echo 'Test process..'
+	    sh 'exit 0'
+         }
+      }
+      stage('Deploy') {
+         steps {
+            echo 'Deploy process..'           
+         }
+      }
       
-	  stage('Test') {
-         steps {
-            echo 'The Test is started'
-         }
-      }
-	  stage('Deploy') {
-         steps {
-            echo 'The Deploy is started'
-         }
-      }
    }
 }
