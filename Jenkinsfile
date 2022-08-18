@@ -39,8 +39,8 @@ pipeline {
       stage('log file') {
          steps {
             echo 'log file'  
-		 sh''' cd "${WORKSPACE}/"
-		  "commit of ""${LANG}""TIME $(date +%F) ">> logfile
+		 sh''' cd "${WORKSPACE}"
+		  echo "commit of ""${LANG}"" TIME $(date) ">> logfile
 		  '''
          }
       }
